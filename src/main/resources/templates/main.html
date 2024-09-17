@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Pantalla Principal</title>
+  <script>
+    function updateText() {
+      fetch('/updateText', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ /* Puedes enviar datos aquí si es necesario */ })
+      })
+              .then(response => response.text())
+              .then(html => {
+                document.getElementById('text-container').innerHTML = html;
+              })
+              .catch(error => console.error('Error:', error));
+    }
+  </script>
+</head>
+<body>
+<h1>Pantalla Principal</h1>
+<button onclick="updateText()">Actualizar Texto</button>
+<!-- Contenedor para el fragmento de texto -->
+<div id="text-container">
+  <!-- Incluye el fragmento de texto -->
+  <div th:replace="fragments/textFragment :: text"></div>
+</div>
+</body>
+</html>
