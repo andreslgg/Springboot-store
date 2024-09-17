@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Error - Something went wrong</title>
+  <link rel="stylesheet" th:href="@{/css/error.css}">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f8f8f8;
+      color: #333;
+      text-align: center;
+      padding: 50px;
+    }
+
+    .error-container {
+      background-color: white;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      padding: 30px;
+      max-width: 600px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      color: #e74c3c;
+    }
+
+    p {
+      font-size: 1.2em;
+      margin-bottom: 20px;
+    }
+
+    .actions {
+      margin-top: 30px;
+    }
+
+    .actions a {
+      text-decoration: none;
+      color: white;
+      background-color: #3498db;
+      padding: 10px 20px;
+      border-radius: 5px;
+      transition: background-color 0.3s;
+    }
+
+    .actions a:hover {
+      background-color: #2980b9;
+    }
+
+    .contact-support {
+      margin-top: 20px;
+      font-size: 0.9em;
+      color: #555;
+    }
+  </style>
+</head>
+<body>
+
+<div class="error-container">
+  <h1>Error!</h1>
+  <p>Sorry, something went wrong.</p>
+
+  <div class="actions">
+    <a th:href="@{/}">Go back to Home</a>
+    <a th:href="@{/contact}">Contact Support</a>
+  </div>
+
+  <p class="contact-support">
+    If the problem persists, please reach out to our support team.
+  </p>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,15 @@
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\configuration\AppConfig.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\controller\CartController.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\controller\ErrorController.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\controller\HomeController.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\controller\NotificationController.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\controller\ProductController.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\GlobalExceptionHandler.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\model\Cart.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\model\CartItem.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\model\Product.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\OncommerceWebApplication.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\repository\ProductRepository.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\service\CartService.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\service\CartServiceImpl.java
+C:\Users\andre\Downloads\oncommerce-web\src\main\java\com\store\oncommerce_web\service\ProductService.java

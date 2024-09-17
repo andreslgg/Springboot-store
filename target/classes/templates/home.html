@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <link rel="stylesheet" th:href="@{/home.css}">
+  <link rel="stylesheet" th:href="@{/cart.css}">
+
+  <title>Product Page</title>
+</head>
+<body>
+<div class="container">
+  <div id="notification" class="notification"></div>
+  <div class="product-list">
+    <!-- Loop through products -->
+    <div class="product-card" th:each="product : ${products}" th:data-id="${product.id}">
+
+      <img th:src="@{${product.image}}" alt="Product Image" class="product-image">
+      <div class="product-card-content">
+        <h3 th:text="${product.title}"></h3>
+        <p th:class="price" th:if="${product.discount > 0}" class="discounted-price" th:text="'$ ' + ${product.getDiscountedPrice()}"></p>
+        <p th:class="price" th:unless="${product.discount >0}" th:text="'$ ' + ${product.price}"></p>
+        <p th:if="${product.discount >0}" class="original-price" th:text="'$ ' + ${product.price}"></p>
+        <div class="product-actions">
+          <!-- Colores disponibles -->
+          <form class="product-form" th:action="@{/cart/add}" id="add-to-cart-form" method="post">
+            <input type="hidden" name="productId" th:value="${product.id}">
+
+            <!-- Selección de colores usando radio buttons -->
+            <div th:if="${product.getColorImagesAsMap().size() > 0}" th:class="product-colors">
+              <label>
+                <input th:class="box" type="radio" name="color" value="default" th:data-image-url="@{${product.image}}" checked>
+                <span th:style="'background-color: #232323'" class="color-box"></span>
+              </label>
+              <label th:each="entry : ${product.getColorImagesAsMap()}">
+                <input th:class="box" type="radio" name="color" th:value="${entry.key}" th:data-image-url="${entry.value}">
+                <span th:style="'background-color: ' + ${entry.key}" class="color-box"></span>
+              </label>
+            </div>
+
+            <!-- Campo de cantidad -->
+            <div class="product-quantity">
+              <input type="number" id="quantity-${product.id}" name="quantity" min="1" value="1">
+            </div>
+
+            <!-- Botón de agregar al carrito -->
+            <button type="submit" class="btn-add-to-cart">Add to Cart</button>
+          </form>
+
+        </div>
+
+
+      </div>
+    </div>
+
+  </div>
+
+
+  <div class="right-container">
+
+    <div class="upside">
+
+      <div id="filter-section" class="filter-section">
+        <h2>Filter products</h2>
+        <form id="filter-form" action="/products" method="get">
+          <label for="search">Search by name:</label>
+          <input type="text" id="search" name="searchTerm">
+
+          <label for="category">Category:</label>
+          <select id="category" name="category">
+            <option value="">All Categories</option>
+            <!-- Loop through categories and display them as options -->
+            <option th:each="category : ${categories}" th:value="${category}" th:text="${category}"></option>
+          </select>
+          <label for="minPrice">Minimum price:</label>
+          <input type="number" id="minPrice" min="1" name="minPrice">
+
+          <label for="maxPrice">Maximum price:</label>
+          <input type="number" id="maxPrice" min="1" name="maxPrice">
+
+          <label for="minRating">Minmum rating:</label>
+          <input type="number" id="minRating" name="minRating" step="0.1" min="0" max="5">
+
+          <button type="submit">Apply Filter</button>
+        </form>
+
+
+      </div>
+      <div class="product-details hidden">
+        <h2>Product details</h2>
+        <!-- Details will be populated dynamically -->
+        <div id="details-content" >
+          <p></p>
+        </div>
+      </div>
+
+    </div>
+    <div class="downside">
+      <div class="best-discount">
+        <div th:class="distance">
+          <h3>Promotions!</h3>
+          <p class="discount-info" th:text="${bestDiscountProduct.discount} + '% OFF'"></p>
+        </div>
+        <img th:src="@{${bestDiscountProduct.image}}" alt="Product Image" class="discount-product-image">
+        <h3 th:text="${bestDiscountProduct.title}" class="discount-product-title"></h3>
+        <div class="price-container">
+          <p class="discounted-price" th:text="'$ ' + ${discountedPrice}"></p>
+          <p class="original-price" th:text="'$ ' + ${bestDiscountProduct.price}"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+<div id="cart-sidebar" class="cart-sidebar hidden">
+  <div id="cart">
+    <div th:replace="fragments/cart :: cartfragments"></div>
+
+  </div>
+  <button id="close-cart" class="close-cart hidden" >Close</button>
+</div>
+
+<script src="/js/script.js"></script>
+<script> document.addEventListener('DOMContentLoaded', function() {
+  const colorInputs = document.querySelectorAll('input[name="color"]');
+  const colorImage = document.getElementById('color-image');
+
+  colorInputs.forEach(input => {
+    input.addEventListener('change', function() {
+      const imageUrl = this.getAttribute('data-image-url');
+      if (imageUrl) {
+        colorImage.src = imageUrl;
+        colorImage.style.display = 'block'; // Mostrar la imagen
+      } else {
+        colorImage.src = '';
+        colorImage.style.display = 'none'; // Ocultar la imagen si no hay URL
+      }
+    });
+  });
+
+  // Manejar el caso en el que el color predeterminado es seleccionado
+  const defaultInput = document.querySelector('input[name="color"][value="default"]');
+  if (defaultInput) {
+    defaultInput.addEventListener('change', function() {
+      colorImage.src = ''; // Ocultar la imagen cuando se selecciona el color predeterminado
+      colorImage.style.display = 'none';
+    });
+  }
+});
+
+</script>
+</body>
+</html>
