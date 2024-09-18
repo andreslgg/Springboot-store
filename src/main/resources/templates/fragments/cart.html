@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<div th:fragment="cartfragments" class="cart-container">
+  <div class="col cart-items-section">
+    <div class="cart-header">
+      <div>
+        <p class="cart-title">Shopping cart</p>
+        <p class="cart-items-count" th:text="${cartItems.items.size()}+ ' items in your cart'"></p>
+      </div>
+    </div>
+    <hr>
+
+    <!-- Lista de productos -->
+    <div class="cart-items-list">
+      <div class="cart-item" th:each="product : ${cartItems.items}">
+        <div class="cart-item-body">
+          <div class="cart-item-content">
+            <div class="cart-item-details">
+              <div>
+                <img th:src="@{${product.product.image}}" class="product-image" alt="Shopping item">
+              </div>
+              <div class="product-info">
+                <h5 class="product-title" th:text="${product.product.title}"></h5>
+
+                <div th:if="${product.selectedColor!=null}" class="product-color">
+                  <p class="color-label">Color: </p>
+                  <div class="color-circle" th:style="'background-color: '+${product.selectedColor}"></div>
+                </div>
+              </div>
+            </div>
+            <div class="cart-item-quantity-price">
+              <div class="quantity">
+                <h5 class="quantity-value" th:text="${product.quantity}"></h5>
+              </div>
+              <div class="price">
+                <h5 class="price-value" th:text="'$' + ${product.getTotalPrice()}"></h5>
+              </div>
+              <!-- Cada producto tendrá su propio formulario para eliminarlo -->
+              <form class="delete-item-form" th:action="@{/cart/remove}" method="post" onsubmit="return false">
+                <input type="hidden"  name="productId" th:value="@{product.product.id}">
+                <input type="hidden"  name="color" th:value="@{product.selectedColor}">
+                <button
+                        th:data-product-id="${product.product.id}"
+                        th:data-selected-color="${product.selectedColor}"
+                        onclick="removeFromCart(this)"
+                        class="delete-button"><i class="fas fa-trash-alt"></i>
+                </button>
+              </form>
+
+
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Resumen del carrito (summary) -->
+    <hr>
+  <div class="cart-summary">
+    <h4>Order Summary</h4>
+    <p>Total price: <span th:text="'$'+${cartItems.getTotalPrice()}"></span></p>
+    <button type="button" class="checkout-btn">Checkout</button>
+  </div>
+</div>
+</html>

@@ -1,0 +1,197 @@
+/* Contenedor del carrito */
+.cart-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+/* Título del carrito */
+.cart-title {
+    margin-bottom: 0.25rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.cart-items-count {
+    margin: 0;
+    font-size: 0.9rem;
+}
+
+/* Enlace de ordenamiento */
+.cart-sort .text-link {
+    text-decoration: none;
+    color: #000;
+}
+
+/* Ícono de ordenamiento */
+.icon-sort {
+    font-size: 0.9rem;
+    margin-left: 0.5rem;
+}
+
+/* Contenedor de ítems del carrito */
+.cart-item {
+    margin-bottom: 1.5rem;
+    border-radius: 8px;
+    background-color: #ffffff; /* Fondo suave */
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Sombra para efecto de elevación */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.cart-item:hover {
+    transform: translateY(-5px); /* Efecto de elevación al pasar el ratón */
+    box-shadow: 0px 8px 12px rgba(0, 0, 0, 0.2); /* Sombra más pronunciada al hacer hover */
+}
+
+.cart-item-body {
+    padding: 1rem;
+    width: 100%;
+}
+
+.cart-item-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+/* Detalles del producto */
+.cart-item-details {
+    display: flex;
+    align-items: center;
+}
+
+.product-image {
+    width: 65px;
+    border-radius: 0.3rem;
+}
+
+.product-info {
+    margin-left: 1rem;
+}
+
+.product-title {
+    /*font-size: 1rem;*/
+    font-weight: normal;
+    margin: 0;
+}
+
+/* Información del color del producto */
+.product-color {
+    display: flex;
+    align-items: center;
+}
+
+.color-label {
+    margin: 0;
+    font-size: 0.8rem;
+}
+
+.color-circle {
+    display: inline-block;
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    margin-left: 0.5rem;
+}
+
+/* Cantidad y precio */
+.cart-item-quantity-price {
+    display: flex;
+    align-items: center;
+}
+
+.quantity-value, .price-value {
+    /*font-size: 1rem;*/
+    margin: 0 1rem;
+}
+
+/* Icono de eliminar */
+.delete-item .icon-delete {
+    color: #699dff;
+    font-size: 1.2rem;
+    cursor: pointer;
+}
+
+/* Texto limitado en la descripción */
+.limited-text {
+    width: 250px;
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    text-overflow: ellipsis;
+    white-space: normal;
+}
+
+/* Círculos de color */
+.color-circle {
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    border: 1px solid #333333;
+    margin: 5px;
+}
+/* Contenedor principal del carrito */
+.cart-container {
+    display: flex;
+    flex-direction: column;
+    height: 100vh; /* Ocupa toda la altura de la pantalla */
+    justify-content: space-between; /* Mantiene las dos secciones separadas */
+}
+
+/* Sección de los productos */
+.cart-items-section {
+    flex-grow: 1;
+    overflow-y: auto; /* Permite que la lista de productos sea desplazable */
+    padding-bottom: 120px; /* Espacio reservado para el resumen en la parte inferior */
+}
+
+/* Lista de productos */
+.cart-items-list {
+    max-height: 70vh; /* Ajusta la altura de la lista de productos */
+    /*overflow-y: auto; !* Agrega scroll si es necesario *!*/
+}
+
+/* Sección del resumen del carrito */
+.cart-summary {
+    position: sticky;
+    bottom: 0; /* Fija el resumen al final de la pantalla */
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8%;
+    box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.1); /* Sombra para dar un aspecto flotante */
+    border-top: 1px solid #ddd;
+    z-index: 10;
+}
+
+/* Botón de checkout */
+.checkout-btn {
+    background-color: #0eb4dd;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.checkout-btn:hover {
+    background-color: #0a8bb0;
+}
+
+
+
+.product-info {
+    margin-left: 1rem;
+}
+
+.delete-item {
+    color: #0eb4dd;
+}
+
+.quantity-value, .price-value {
+    font-size: 1rem;
+}
+
+/* Resto de tus estilos */

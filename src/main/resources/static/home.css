@@ -1,0 +1,488 @@
+
+
+/* Contenedor principal */
+.container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    width: 90%;
+    max-width: 1200px;
+    margin: 20px auto;
+}
+
+/* Estilos para la lista de productos */
+.product-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+/* Estilos para las tarjetas de producto */
+.product-card {
+    display: flex; /* Usar flexbox para el diseño interno */
+    flex-direction: column; /* Alinear elementos verticalmente */
+    justify-content: space-between; /* Espacio entre elementos para alinear el contenido al fondo */
+    background-color: rgba(255, 245, 235, 0.4); /* Beige claro con 90% opacidad */
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 15px;
+    height: 600px; /* Altura fija para todas las tarjetas */
+    text-align: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.product-card .price {
+    font-family: 'Lato', sans-serif;
+    font-size: 1.5rem;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+
+
+/* Efecto de hover para las tarjetas */
+.product-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+/* Estilo para las imágenes del producto */
+.product-card img {
+    width: 100%; /* Ajusta el ancho al contenedor padre */
+    height: auto; /* Mantiene la proporción de la imagen */
+    max-height: 450px; /* Altura máxima para evitar que la imagen sea demasiado grande */
+    object-fit: contain; /* Ajusta la imagen para que se ajuste dentro del contenedor sin recortarse */
+    border-radius: 10px; /* Bordes redondeados para las imágenes */
+    margin-bottom: 10px; /* Espacio entre la imagen y el contenido */
+}
+
+/* Estilos para el título del producto */
+.product-card h3 {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #666;
+}
+
+/* Estilos para los párrafos en la tarjeta */
+.product-card p {
+    font-size: 1rem;
+    color: #333;
+    margin: 5px 0; /* Espacio entre párrafos */
+}
+
+/* Añade un contenedor para el contenido del producto si es necesario */
+.product-card-content {
+    margin-top: auto; /* Empuja el contenido hacia el fondo de la tarjeta */
+}
+
+/* Estilos para los botones */
+.product-actions button {
+    padding: 10px 15px;
+    margin: 10px 5px;
+    border: none;
+    border-radius: 5px;
+    background-color: #f39c12;
+    color: white;
+    cursor: pointer;
+    font-size: 1rem;
+}
+
+.product-actions button:hover {
+    background-color: #e67e22;
+}
+
+/* Estilos para los círculos de colores */
+.product-colors {
+    margin-top: 10px;
+}
+
+.color-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-right: 5px;
+    cursor: pointer;
+}
+
+/* Ocultar contenido original al hacer hover y mostrar botones y colores */
+.product-card:hover .product-card-content h3,
+.product-card:hover .product-card-content p {
+    display: none;
+}
+/* Estilo inicial para el contenedor product-actions */
+.product-actions {
+    display: none; /* Oculta el contenedor por defecto */
+    /* Puedes agregar otros estilos aquí si es necesario */
+}
+
+/* Muestra el contenedor product-actions al pasar el ratón sobre product-card */
+.product-card:hover .product-actions {
+    display: block;
+}
+
+
+/* Asegúrate de que product-card tenga una posición relativa para que product-actions se posicione correctamente */
+.product-card {
+    position: relative;
+}
+
+
+
+
+
+.right-container {
+    position: sticky; /* Mantener la posición al hacer scroll */
+    top: 60px; /* Espacio desde la parte superior */
+    height: 90vh;
+}
+
+/* Estilos para la sección de detalles */
+.upside, .downside {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    /* Alineación uniforme del contenido */
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start; /* Iniciar contenido desde arriba */
+    align-items: flex-start; /* Alinear texto a la izquierda */
+    text-align: left;
+
+    /* Mantener uniformidad en las alturas */
+    min-height: 30vh; /* Establecer una altura mínima */
+    width: 100%; /* Asegurar que todas las cartas ocupen el mismo ancho */
+}
+
+/* Estilos específicos para cada carta */
+.upside {
+    height: 50vh;  /* Altura fija del 50% de la pantalla */
+}
+
+.downside {
+    height: 30vh;  /* Altura fija del 30% de la pantalla */
+    margin-top: 20px; /* Espacio entre las dos cartas */
+}
+
+
+.best-discount .product-card img {
+    height: 150px;  /* Set a fixed height */
+    width: auto;    /* Maintain aspect ratio */
+    object-fit: contain;  /* Ensure the image fits within the defined height */
+    margin-bottom: 10px;  /* Add some spacing below the image */
+}
+
+
+
+.price-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline;
+    gap: 10px; /* Space between the original and discounted prices */
+}
+
+
+/* Estilo para la imagen del producto */
+.discount-product-image {
+    height: 120px;
+    width: auto;
+    object-fit: contain;
+    margin: 0 auto; /* Asegurarse de que la imagen se centre */
+    display: block; /* Convertir la imagen en un elemento de bloque */
+    margin-bottom: 10px;
+}
+
+
+    /* Estilo para el título del producto */
+.discount-product-title {
+    font-size: 1.2rem;
+    margin: 10px 0;
+    color: #333;
+    text-align: center;
+}
+
+/* Estilo para el precio original */
+.original-price {
+    font-size: 1rem;
+    color: #666;
+    text-decoration: line-through; /* Tachado del precio original */
+}
+
+/* Estilo para la información del descuento */
+.discount-info {
+    font-size: 1.5rem;
+    color: #e74c3c; /* Color para el texto del descuento */
+    font-weight: bold;
+}
+
+/* Estilo para el precio con descuento */
+.discounted-price {
+    font-size: 1.5rem;
+    color: #27ae60; /* Color verde para el precio con descuento */
+    font-weight: bold;
+    text-align: center;
+}
+
+
+.discounted-price {
+    color: #e74c3c; /* Color for the discounted price */
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.price-container {
+    display: flex;
+    justify-content: center;
+    align-items: baseline; /* Alinea los precios al mismo nivel */
+    gap: 10px; /* Espacio entre los precios */
+}
+
+.distance{
+    display: flex;
+    justify-content: space-between; /* Distribuye los elementos */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+.upside h2 {
+    font-size: 1.5rem;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+#upside {
+    flex-grow: 1;
+    overflow-y: auto;
+    text-align: center; /* Centrar el texto */
+}
+
+#upside p {
+    font-size: 1rem;
+    color: #666;
+    margin: 10px 0;
+}
+
+/* Ocultar los detalles cuando no se selecciona ningún producto */
+.hidden {
+    display: none;
+}
+
+/* Mejorar la transición de hover */
+.product-card:hover {
+    cursor: pointer;
+    border-color: #007bff;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        grid-template-columns: 1fr;
+    }
+
+    .product-list {
+        grid-template-columns: 1fr;
+    }
+
+    .product-details {
+        margin-top: 20px;
+        height: auto;
+    }
+}
+
+.filter-section {
+    width: 100%;
+}
+
+.filter-section form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filter-section input,
+.filter-section select,
+.filter-section button {
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filter-section button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+
+.filter-section button:hover {
+    background-color: #0056b3;
+}
+
+
+/* Estilo para el campo de cantidad */
+.product-quantity {
+    margin-top: 10px;
+}
+
+.product-quantity label {
+    margin-right: 5px;
+}
+
+/* Estilo para los botones de selección de color */
+.product-colors {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.product-colors label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    position: relative;
+}
+
+/* Ocultar los círculos predeterminados de los radio buttons */
+.product-colors input[type="radio"] {
+    position: absolute;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Estilo para las cajas de color personalizadas */
+.color-box {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    margin-left: 8px;
+    border: 1px solid #ccc;
+    transition: border 0.3s ease;
+}
+
+/* Resaltar el color seleccionado */
+.product-colors input[type="radio"]:checked + .color-box {
+    border: 2px solid #000; /* Borde más grueso para la selección */
+}
+.notification {
+    display: none;
+    position: fixed;
+    bottom: 20px; /* Posición más abajo */
+    right: 20px; /* Posición desde la derecha */
+    padding: 15px;
+    background-color: #007BFF; /* Color azul */
+    color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para un efecto 3D */
+    font-size: 16px;
+    font-family: Arial, sans-serif;
+    z-index: 1000;
+    max-width: 300px;
+    text-align: center;
+    transition: opacity 0.5s ease; /* Transición suave */
+}
+
+
+.cart-sidebar {
+    position: fixed;
+    right: 0px; /* Oculta el carrito fuera de la pantalla */
+    top: 0;
+    width: 600px;
+    height: 100%;
+    background-color: #efecec;
+    box-shadow: -2px 0 5px rgba(0,0,0,0.5);
+    padding: 20px;
+    transition: right 0.3s ease; /* Animación suave para mostrar/ocultar */
+    z-index: 1000;
+}
+
+.cart-sidebar.open {
+    right: 0; /* Mueve el carrito a la vista */
+}
+
+.close-cart {
+    margin-top: 20px;
+    padding: 10px 20px;
+    background-color: #ff4b4b;
+    color: white;
+    border: none;
+    cursor: pointer;
+}
+
+.open-cart {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    padding: 10px 20px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    cursor: pointer;
+    z-index: 1000;
+}
+
+#cart-items {
+    margin-top: 20px;
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+
+.cart-item img {
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.cart-item-details {
+    margin-left: 10px;
+}
+
+.cart-item-remove {
+    background-color: #ff4b4b;
+    color: white;
+    border: none;
+    padding: 5px;
+    cursor: pointer;
+}
+
+/* Botón de limpiar carrito */
+#clearCartButton {
+    background-color: #ff4c4c; /* Rojo brillante para resaltar el botón */
+    color: #fff; /* Texto en blanco */
+    border: none; /* Sin borde */
+    border-radius: 5px; /* Bordes redondeados */
+    padding: 10px 20px; /* Espaciado interno (padding) */
+    font-size: 16px; /* Tamaño de fuente */
+    font-weight: bold; /* Fuente en negrita */
+    cursor: pointer; /* Puntero de mano al pasar sobre el botón */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Transiciones suaves para el color de fondo y el efecto de hover */
+}
+
+#clearCartButton:hover {
+    background-color: #e03e3e; /* Color de fondo más oscuro al pasar el ratón */
+}
+
+#clearCartButton:active {
+    background-color: #c02d2d; /* Color de fondo aún más oscuro al hacer clic */
+    transform: scale(0.98); /* Efecto de pulsación al hacer clic */
+}
+
+#clearCartButton:disabled {
+    background-color: #ddd; /* Color de fondo para cuando el botón está deshabilitado */
+    color: #aaa; /* Color del texto cuando el botón está deshabilitado */
+    cursor: not-allowed; /* Cursor de no permitido */
+}

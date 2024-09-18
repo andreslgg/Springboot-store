@@ -1,0 +1,130 @@
+body {
+    margin: 0;
+    height: 100%;
+    font-family: Arial, sans-serif;
+    display: flex;
+    flex-direction: column;
+    padding-top: 60px; /* Espacio para la barra de navegación */
+    background-color: #E3E6E6;
+
+}
+
+.navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    transition: top 0.3s;
+    z-index: 1000; /* Asegura que se mantenga encima */
+}
+
+.main-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.logo {
+    font-size: 1.5em;
+    color: #333;
+    text-decoration: none;
+}
+
+.nav-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1em;
+}
+
+.nav-links a:hover {
+    color: #007bff;
+}
+
+.content {
+    flex: 1;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.footer {
+    background-color: #000;
+    color: #fff;
+    text-align: center;
+    padding: 10px;
+    position: relative;
+    /*width: 100%;*/
+    bottom: 0;
+}
+
+.footer p {
+    margin: 0;
+}
+
+/* Para ajustar el contenido debajo de la barra de navegación */
+.main-content {
+    padding-top: 60px; /* Asegura que el contenido no quede bajo la barra */
+}
+
+/* Estilo para hacer desaparecer la barra al hacer scroll */
+.navbar-hidden {
+    top: -60px; /* Ajusta para ocultar la barra de navegación */
+}
+
+/* Animación de la barra */
+.navbar-visible {
+    top: 0;
+}
+
+.cart-button {
+
+    width: 40px; /* Ancho del botón */
+    height: 40px; /* Altura del botón */
+    display: inline-block;
+    padding: 5px; /* Un pequeño espacio alrededor del icono */
+    transition: transform 0.3s ease, color 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+    color: black; /* Color inicial */
+    text-decoration: none; /* Sin subrayado */
+}
+
+
+.cart-button svg {
+    width: 40px; /* Tamaño del SVG */
+    height: 40px;
+    transition: transform 0.3s ease; /* Transición suave para el SVG */
+}
+
+.cart-button:hover {
+    transform: scale(1.1); /* Escalar el enlace ligeramente */
+    color: #007BFF; /* Cambiar el color a un tono azul al hacer hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Agregar sombra suave */
+}
+
+.cart-button:hover svg {
+    transform: scale(1.2); /* Escalar el SVG ligeramente */
+}
+
+.cart-button i {
+    font-size: 16px; /* Tamaño del icono */
+}
+
+.nav-links li {
+    display: flex;
+    align-items: center; /* Centrar verticalmente cada <li> */
+}
