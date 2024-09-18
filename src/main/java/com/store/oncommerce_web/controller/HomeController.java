@@ -77,12 +77,14 @@ public class HomeController {
 
             model.addAttribute("bestDiscountProduct", bestDiscountProduct);
             model.addAttribute("discountedPrice", discountedPrice);
+            BigDecimal shippingCost = cartService.getShippingCost();
+            model.addAttribute("shippingCost", shippingCost);
         }
         Cart cart = cartService.getCart();
         cart.calculateTotalPrice();
         model.addAttribute("cartItems", cart);
         model.addAttribute("cart","cart");
-
+        model.addAttribute("hasProducts", cartService.hasProducts());
         model.addAttribute("content","home");
         return "layout";
     }

@@ -5,6 +5,8 @@ import com.store.oncommerce_web.model.CartItem;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Objects;
@@ -84,6 +86,28 @@ public class CartServiceImpl implements CartService {
 
         // Opcional: recalcular el total después de la eliminación
         cart.calculateTotalPrice();
+    }
+
+    @Override
+    public BigDecimal getShippingCost() {
+        return BigDecimal.valueOf(10.0);
+    }
+
+    @Override
+    public BigDecimal getTotalPrice(){
+        return cart.getTotalPrice();
+    }
+
+    @Override
+    public Boolean hasProducts() {
+        return !cart.getItems().isEmpty();
+
+    }
+
+    @Override
+    public BigDecimal getTaxAmount() {
+        BigDecimal taxRate = BigDecimal.valueOf(0.07); // Ejemplo: 7% de impuestos
+        return getTotalPrice().multiply(taxRate).setScale(2, RoundingMode.HALF_UP);
     }
 
 }

@@ -5,6 +5,7 @@ import com.store.oncommerce_web.model.Cart;
 import com.store.oncommerce_web.model.CartItem;
 import org.springframework.stereotype.Service;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Service
@@ -16,4 +17,8 @@ public interface CartService {
     void clearCart();
 
     void removeItemFromCart(Long productId, String color);
+    BigDecimal getShippingCost();
+    BigDecimal getTaxAmount();
+    BigDecimal getTotalPrice();
+    Boolean hasProducts();
 }

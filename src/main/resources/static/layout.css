@@ -128,3 +128,8 @@ body {
     display: flex;
     align-items: center; /* Centrar verticalmente cada <li> */
 }
+
+.bold{
+    font-weight: bold;
+    color: #333;
+}

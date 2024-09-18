@@ -24,6 +24,8 @@ import org.thymeleaf.context.IContext;
 import org.thymeleaf.context.WebContext;
 import org.thymeleaf.spring6.SpringTemplateEngine;
 import org.thymeleaf.web.IWebExchange;
+
+import java.math.BigDecimal;
 import java.util.*;
 
 @Controller
@@ -34,6 +36,7 @@ public class CartController {
 
     @Autowired
     private ProductService productService;
+
 
     @PostMapping("/cart/clear")
     public String clearCart(Model model) {
@@ -55,6 +58,10 @@ public class CartController {
         cartService.addItemToCart(cartItem);
         Cart cart = cartService.getCart();
         model.addAttribute("cartItems", cart);
+        model.addAttribute("shippingCost", cartService.getShippingCost());
+
+
+        model.addAttribute("hasProducts", cartService.hasProducts());
 
         return "fragments/cart :: cartfragments";
     }
@@ -64,6 +71,7 @@ public class CartController {
         Cart cart = cartService.getCart();
         model.addAttribute("cartItems", cart);
         model.addAttribute("content", "cart");
+        model.addAttribute("hasProducts", cartService.hasProducts());
 
         return "layout";
     }
@@ -79,6 +87,10 @@ public class CartController {
         Cart cart = cartService.getCart();
         cart.calculateTotalPrice();
         model.addAttribute("cartItems", cart);
+
+        model.addAttribute("shippingCost", cartService.getShippingCost());
+        model.addAttribute("hasProducts", cartService.hasProducts());
+
         return "fragments/cart :: cartfragments"; // Devuelve el fragmento actualizado
     }
 

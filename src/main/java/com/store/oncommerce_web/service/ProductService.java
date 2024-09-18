@@ -15,7 +15,7 @@ public class ProductService {
     @Autowired
     private  ProductRepository productRepository;
 
-    private final String API_URL = "https://fakestoreapi.com/products?limit=50";
+    private final String API_URL = "https://fakestoreapi.com/products?limit=20";
 
     public List<Product> fetchAndSaveProducts() {
         RestTemplate restTemplate = new RestTemplate();
