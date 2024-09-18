@@ -1,0 +1,57 @@
+/* Estilo general para la vista de checkout */
+.checkout-summary {
+    max-width: 800px; /* Ajusta el ancho máximo del contenedor */
+    margin: 0 auto; /* Centra el contenedor horizontalmente */
+    padding: 1.5rem; /* Añade espacio interno */
+    background-color: #f9f9f9; /* Color de fondo claro */
+    border-radius: 0.5rem; /* Bordes redondeados */
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1); /* Sombra sutil para destacar */
+}
+
+.checkout-summary h4 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #333; /* Color del texto */
+}
+
+.checkout-summary .summary-item {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 0.75rem; /* Espacio entre elementos */
+    font-size: 1rem;
+    color: #555; /* Color de texto gris oscuro */
+}
+
+.checkout-summary .summary-item span:last-child {
+    font-weight: bold; /* Destaca los valores */
+    color: #000; /* Color del texto de valores */
+}
+
+.checkout-summary .summary-item:last-child {
+    margin-bottom: 0; /* Elimina el margen en el último elemento */
+}
+
+.checkout-summary form {
+    margin-top: 1.5rem; /* Espacio encima del formulario */
+}
+
+.checkout-btn {
+    display: block;
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.2rem;
+    color: white;
+    background-color: #007bff; /* Color de fondo del botón */
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    text-align: center;
+    text-decoration: none; /* Elimina el subrayado del texto */
+    transition: background-color 0.3s ease; /* Transición suave para el cambio de color */
+}
+
+.checkout-btn:hover {
+    background-color: #0056b3; /* Color del botón en hover */
+}

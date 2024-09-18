@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Checkout</title>
+    <link rel="stylesheet" th:href="@{/checkout.css}">
+</head>
+<body>
+<div class="checkout-summary">
+    <h4>Checkout Summary</h4>
+    <div class="summary-item">
+        <span>Sub-Total:</span>
+        <span th:text="'$' + ${subTotal}"></span>
+    </div>
+    <div class="summary-item">
+        <span>Shipping:</span>
+        <span th:text="'$' + ${shippingCost}"></span>
+    </div>
+    <div class="summary-item">
+        <span>Taxes:</span>
+        <span th:text="'$' + ${taxAmount}"></span>
+    </div>
+    <div class="summary-item">
+        <span>Total Amount:</span>
+        <span th:text="'$' + ${totalAmount}"></span>
+    </div>
+    <form action="/complete-order" method="post">
+        <!-- Campos del formulario -->
+        <button type="submit" class="checkout-btn">Complete Order</button>
+    </form>
+</div>
+</body>
+</html>
