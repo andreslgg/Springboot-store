@@ -23,10 +23,15 @@
         <span>Total Amount:</span>
         <span th:text="'$' + ${totalAmount}"></span>
     </div>
-    <form action="/complete-order" method="post">
-        <!-- Campos del formulario -->
-        <button type="submit" class="checkout-btn">Complete Order</button>
+
+    <form action="/payment/create" method="post">
+        <input type="hidden" name="amount" th:value="${totalAmount}">
+        <input type="hidden" name="currency" value="USD"> <!-- Cambiar la moneda según sea necesario -->
+        <input type="hidden" name="method" value="paypal">
+        <input type="hidden" name="description" value="Purchase at Store">
+        <button type="submit">Pay with PayPal</button>
     </form>
+
 </div>
 </body>
 </html>
