@@ -1,0 +1,47 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  annotations:
+    kompose.cmd: kompose convert
+    kompose.version: 1.31.2 (a92241f79)
+  creationTimestamp: null
+  labels:
+    io.kompose.service: server
+  name: server
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      io.kompose.service: server
+  strategy: {}
+  template:
+    metadata:
+      annotations:
+        kompose.cmd: kompose convert
+        kompose.version: 1.31.2 (a92241f79)
+      creationTimestamp: null
+      labels:
+        io.kompose.network/oncommerce-web-app-network: "true"
+        io.kompose.service: server
+    spec:
+      containers:
+        - env:
+            - name: SERVER_PORT
+              value: "8082"
+            - name: SPRING_DATASOURCE_DRIVER-CLASS-NAME
+              value: org.postgresql.Driver
+            - name: SPRING_DATASOURCE_PASSWORD
+              value: "1216"
+            - name: SPRING_DATASOURCE_URL
+              value: jdbc:postgresql://db:5432/store
+            - name: SPRING_DATASOURCE_USERNAME
+              value: postgres
+          image: andresgzz/server:latest
+          name: server
+          ports:
+            - containerPort: 8082
+              hostPort: 8082
+              protocol: TCP
+          resources: {}
+      restartPolicy: Always
+status: {}
