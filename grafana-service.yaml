@@ -6,16 +6,16 @@ metadata:
     kompose.version: 1.31.2 (a92241f79)
   creationTimestamp: null
   labels:
-    io.kompose.service: server
-  name: server
+    io.kompose.service: grafana
+  name: grafana
 spec:
   type: NodePort
   ports:
-    - name: "8082"
-      port: 8082
-      targetPort: 8082
-      nodePort: 32001
+    - name: "3000"
+      port: 3000
+      targetPort: 3000
+      nodePort: 30000
   selector:
-    io.kompose.service: server
+    io.kompose.service: grafana
 status:
   loadBalancer: {}

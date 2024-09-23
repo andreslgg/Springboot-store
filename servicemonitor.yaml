@@ -1,0 +1,15 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: server-monitor
+  labels:
+    app: server
+spec:
+  selector:
+    matchLabels:
+      io.kompose.service: server
+  endpoints:
+    - port: "8082"
+      path: /actuator/prometheus
+    - port: "8082"
+      path: /fetch-products

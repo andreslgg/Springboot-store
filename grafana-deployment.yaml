@@ -6,13 +6,13 @@ metadata:
     kompose.version: 1.31.2 (a92241f79)
   creationTimestamp: null
   labels:
-    io.kompose.service: prometheus
-  name: prometheus
+    io.kompose.service: grafana
+  name: grafana
 spec:
   replicas: 1
   selector:
     matchLabels:
-      io.kompose.service: prometheus
+      io.kompose.service: grafana
   strategy: {}
   template:
     metadata:
@@ -22,24 +22,15 @@ spec:
       creationTimestamp: null
       labels:
         io.kompose.network/oncommerce-web-app-network: "true"
-        io.kompose.service: prometheus
+        io.kompose.service: grafana
     spec:
       containers:
-        - image: prom/prometheus
-          name: prometheus
+        - image: grafana/grafana
+          name: grafana
           ports:
-            - containerPort: 9090
-              hostPort: 9090
+            - containerPort: 3000
+              hostPort: 3000
               protocol: TCP
-          args:
-            - --config.file=/etc/prometheus/prometheus.yml
-          volumeMounts:
-            - name: config-volume
-              mountPath: /etc/prometheus
           resources: {}
       restartPolicy: Always
-      volumes:
-        - name: config-volume
-          configMap:
-            name: prometheus-config
 status: {}
