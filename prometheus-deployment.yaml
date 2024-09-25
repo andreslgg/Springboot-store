@@ -4,7 +4,6 @@ metadata:
   annotations:
     kompose.cmd: kompose convert
     kompose.version: 1.31.2 (a92241f79)
-  creationTimestamp: null
   labels:
     io.kompose.service: prometheus
   name: prometheus
@@ -13,15 +12,15 @@ spec:
   selector:
     matchLabels:
       io.kompose.service: prometheus
-  strategy: {}
+  strategy:
+    type: Recreate
   template:
     metadata:
       annotations:
         kompose.cmd: kompose convert
         kompose.version: 1.31.2 (a92241f79)
-      creationTimestamp: null
       labels:
-        io.kompose.network/oncommerce-web-app-network: "true"
+        io.kompose.network/oncommerce-web-default: "true"
         io.kompose.service: prometheus
     spec:
       containers:
@@ -29,17 +28,17 @@ spec:
           name: prometheus
           ports:
             - containerPort: 9090
-              hostPort: 9090
               protocol: TCP
-          args:
-            - --config.file=/etc/prometheus/prometheus.yml
           volumeMounts:
-            - name: config-volume
-              mountPath: /etc/prometheus
-          resources: {}
+            - name: prometheus-config-volume
+              mountPath: /etc/prometheus/prometheus.yml
+              subPath: prometheus.yml
       restartPolicy: Always
       volumes:
-        - name: config-volume
+        - name: prometheus-config-volume
           configMap:
-            name: prometheus-config
+            name: prometheus-config  # Debe coincidir con el nombre de tu ConfigMap
+            items:
+              - key: prometheus.yml
+                path: prometheus.yml
 status: {}

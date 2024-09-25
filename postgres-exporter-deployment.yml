@@ -14,19 +14,16 @@ spec:
     spec:
       containers:
         - name: postgres-exporter
-          image: quay.io/prometheuscommunity/postgres-exporter:latest
-          ports:
-            - containerPort: 9187
+          image: wrouesnel/postgres_exporter
+          args:
+            - "--extend.query-path=/etc/postgres_exporter/queries.yaml"
           env:
-            - name: DATA_SOURCE_URI
+            - name: DATA_SOURCE_NAME
               value: "postgresql://postgres:1216@db:5432/store?sslmode=disable"
-            - name: DATA_SOURCE_USER
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_USER
-            - name: DATA_SOURCE_PASS
-              valueFrom:
-                secretKeyRef:
-                  name: postgres-secret
-                  key: POSTGRES_PASSWORD
+          volumeMounts:
+            - name: config-volume
+              mountPath: /etc/postgres_exporter
+      volumes:
+        - name: config-volume
+          configMap:
+            name: postgres-exporter-config

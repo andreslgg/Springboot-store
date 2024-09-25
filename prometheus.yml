@@ -1,22 +1,26 @@
-global:
-  scrape_interval: 15s  # Default scrape interval is set to 15 seconds
-
-scrape_configs:
-  # Scrape Prometheus itself
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['localhost:9090']  # The default Prometheus instance
-
-  # Scrape PostgreSQL
-  - job_name: 'postgres'
-    static_configs:
-      - targets: [ 'postgres-exporter:9187' ]
-
-
-    # Scrape your server application
-  - job_name: 'server'
-    scrape_interval: 20s
-    metrics_path: /actuator/prometheus
-    static_configs:
-      - targets: ['server:8082']  # Replace 'server' with your application container name
-
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: prometheus-config
+data:
+  prometheus.yml: |
+    global:
+      scrape_interval:
+    
+    scrape_configs:
+      # Scrape Prometheus itself
+      - job_name: 'prometheus'
+        static_configs:
+          - targets: ['localhost:9090']
+    
+      # Scrape PostgreSQL
+      - job_name: 'postgres'
+        static_configs:
+          - targets: ['postgres-exporter:9187']
+    
+      # Scrape your server application
+      - job_name: 'server'
+        scrape_interval: 20s
+        metrics_path: /actuator/prometheus
+        static_configs:
+          - targets: ['server:8082']
