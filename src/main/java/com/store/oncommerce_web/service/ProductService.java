@@ -3,8 +3,12 @@ package com.store.oncommerce_web.service;
 import com.store.oncommerce_web.model.Product;
 import com.store.oncommerce_web.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 
 import java.util.Arrays;
 import java.util.List;
@@ -16,6 +20,7 @@ public class ProductService {
     private  ProductRepository productRepository;
 
     private final String API_URL = "https://fakestoreapi.com/products?limit=20";
+    private static final Logger log = LoggerFactory.getLogger(ProductRepository.class);
 
     public List<Product> fetchAndSaveProducts() {
         RestTemplate restTemplate = new RestTemplate();
@@ -48,10 +53,18 @@ public class ProductService {
         return product.orElse(null);
     }
 
+    @Cacheable(value = "categoriesCache")
     public List<String> findAllCategories() {
         return productRepository.findDistinctCategories();
     }
 
+    @Cacheable(value = "productsCache", key = "{#searchTerm, #category, #minPrice, #maxPrice, #minRating}")
+    public List<Product> findProducts(String searchTerm, String category, Double minPrice, Double maxPrice, Double minRating) {
+        return productRepository.findProducts(searchTerm, category, minPrice, maxPrice, minRating);
+    }
+
+
+    @Cacheable(value = "bestDiscountProductCache")
     public Product getProductWithBestDiscount() {
         return productRepository.findProductWithBestDiscount();
     }

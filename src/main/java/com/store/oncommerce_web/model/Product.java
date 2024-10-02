@@ -10,6 +10,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
@@ -19,8 +20,8 @@ import java.util.Map;
 
 @Getter
 @Entity
-@Table(name = "product") // Nombre de la tabla en la base de datos
-public class Product {
+@Table(name = "product")
+public class Product implements Serializable {
 
     @Setter
     @Id
@@ -83,7 +84,6 @@ public class Product {
         return this.price.setScale(2, RoundingMode.HALF_UP); // Retorna el precio original si no hay descuento
     }
 
-    // Método para obtener el precio sin descuento (ya redondeado)
     public BigDecimal getPrice() {
         return this.price.setScale(2, RoundingMode.HALF_UP);
     }
@@ -94,7 +94,7 @@ public class Product {
 
     @Embeddable
     @Data
-    public static class Rating {
+    public static class Rating implements Serializable{
         private Double rate;
         private Integer count;
     }

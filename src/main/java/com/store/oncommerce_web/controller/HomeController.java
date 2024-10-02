@@ -7,6 +7,8 @@ import com.store.oncommerce_web.service.CartService;
 import com.store.oncommerce_web.service.ProductService;
 import org.antlr.v4.runtime.tree.pattern.ParseTreePattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -41,12 +43,28 @@ public class HomeController {
         return cartService.getCart(); // Retornamos el carrito desde el servicio
     }
 
+    @ModelAttribute
+    public void addAttributes(Model model, @AuthenticationPrincipal OAuth2User principal) {
+        if (principal != null) {
+            String fullName = principal.getAttribute("name");
+            String firstName = fullName != null ? fullName.split(" ")[0] : "";
+            model.addAttribute("firstName", firstName);
+        }
+    }
+
     @GetMapping("/products")
     public String getProducts(Model model, @RequestParam(required = false) String searchTerm,
                               @RequestParam(required = false) String category,
                               @RequestParam(required = false) Double minPrice,
                               @RequestParam(required = false) Double maxPrice,
-                              @RequestParam(required = false) Double minRating) {
+                              @RequestParam(required = false) Double minRating,
+                              @AuthenticationPrincipal OAuth2User principal) {
+        if (principal != null) {
+            String fullName = principal.getAttribute("name");
+            String firstName = fullName != null ? fullName.split(" ")[0] : "";
+
+            model.addAttribute("firstName", firstName);
+        }
 
         // Recupera el mensaje flash si existe
         if (model.containsAttribute("message")) {
@@ -55,7 +73,7 @@ public class HomeController {
         }
 
         // Continuación del código
-        List<Product> products = productRepository.findProducts(searchTerm, category, minPrice, maxPrice, minRating);
+        List<Product> products = productService.findProducts(searchTerm, category, minPrice, maxPrice, minRating);
         for (Product product : products) {
             if(product.getColorImages() != null) {
                 Map<String, String> colorImages = product.getColorImagesAsMap();
@@ -89,6 +107,11 @@ public class HomeController {
         return "layout";
     }
 
+    @GetMapping("/login")
+    public String login(Model model) {
+        model.addAttribute("content","login");
+        return "layout";
+    }
 
 
 }
