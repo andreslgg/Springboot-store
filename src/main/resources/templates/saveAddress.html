@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Save Address</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <style>
+        /* Estilos para las sugerencias */
+        .suggestions {
+            border: 1px solid #ccc;
+            max-height: 150px;
+            overflow-y: auto;
+            display: none; /* Oculto por defecto */
+        }
+        .suggestion-item {
+            padding: 8px;
+            cursor: pointer;
+        }
+        .suggestion-item:hover {
+            background-color: #f0f0f0;
+        }
+    </style>
+</head>
+<body>
+<h1>Save a New Address</h1>
+
+<form action="#" th:action="@{/address/save}" th:object="${address}" method="post">
+    <label for="street">Street:</label>
+    <input type="text" id="street" th:field="*{street}" required/><br/>
+    <div class="suggestions" id="suggestions"></div> <!-- Contenedor para las sugerencias -->
+
+    <label for="city">City:</label>
+    <input type="text" id="city" th:field="*{city}" required/><br/>
+
+    <label for="state">State:</label>
+    <input type="text" id="state" th:field="*{state}" required/><br/>
+
+    <label for="zipCode">ZIP Code:</label>
+    <input type="text" id="zipCode" th:field="*{zipCode}" required/><br/>
+
+    <button type="submit">Save Address</button>
+</form>
+
+<script>
+    $(document).ready(function() {
+        $('#street').on('input', function() {
+            let query = $(this).val();
+            if (query.length > 2) { // Solo busca si el texto es mayor a 2 caracteres
+                $.get('/address/autocomplete', { query: query }, function(data) {
+                    $('#suggestions').empty().show();
+                    data.forEach(function(suggestion) {
+                        $('#suggestions').append('<div class="suggestion-item">' + suggestion + '</div>');
+                    });
+                });
+            } else {
+                $('#suggestions').hide();
+            }
+        });
+
+        // Manejo del clic en las sugerencias
+        $(document).on('click', '.suggestion-item', function() {
+            $('#street').val($(this).text()); // Establece el valor del campo de entrada
+            $('#suggestions').hide(); // Oculta las sugerencias
+        });
+    });
+</script>
+
+</body>
+</html>

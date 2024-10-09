@@ -1,66 +1,13 @@
 body {
     font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
     background-color: #f4f4f4;
     margin: 0;
-    padding: 0;
+    background: linear-gradient(to right, #ffffff 50%, #004E64 50%);
 }
-
-.checkout-container {
-    display: flex;
-    justify-content: space-between; /* Distribuye las dos columnas */
-    width: 100%;
-    max-width: 1200px; /* Ancho máximo */
-    min-height: 85.5vh; /* Altura de toda la pantalla */
-    margin: 0 auto; /* Centrar el contenedor */
-    padding: 20px;
-    background-color: #EFECE8;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
-
-.address-section {
-    flex: 1; /* Ocupa un ancho proporcional */
-    background-color: #f9f9f9;
-    border-radius: 5px;
-    padding: 20px;
-    border: 1px solid #ddd;
-
-}
-
-.address-section h4 {
-    margin-bottom: 15px;
-}
-
-.address-list {
-    list-style-type: none;
-    padding: 0;
-    max-height: 400px;
-    overflow-y: auto;
-}
-
-.address-list li {
-    background-color: #f9f9f9;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.add-address-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #004E64;
-    color: white;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 10px;
-}
-
-.add-address-button:hover {
-    background-color: #003747;
-}
-
 
 /* Container */
 .container-form {
@@ -98,7 +45,7 @@ form label {
 
 /* Input Styles */
 form input[type="text"],
-form input[type="number"]{
+form input[type="number"] {
     width: 100%;
     padding: 0.8rem;
     margin-bottom: 1.2rem;
@@ -107,47 +54,7 @@ form input[type="number"]{
     background-color: #f9f9f9;
     color: #333;
     transition: border-color 0.3s;
-    box-sizing: border-box;
 }
-
-/* Alinear los radios y el texto en una sola línea */
-ul {
-    list-style-type: none; /* Eliminar viñetas de la lista */
-    padding: 0;
-}
-
-/*ul li {*/
-/*    margin-bottom: 10px; !* Espacio entre cada opción *!*/
-/*    display: flex; !* Alinea radio y texto en la misma fila *!*/
-/*    align-items: center; !* Centrar verticalmente *!*/
-/*}*/
-
-/* Estilo del input radio */
-input[type="radio"] {
-    margin-right: 10px; /* Espacio entre el radio y el texto */
-}
-
-/* Evitar el desbordamiento de texto */
-label {
-    white-space: nowrap; /* Evitar que el texto se divida en varias líneas */
-    overflow: hidden; /* Esconder el texto que se desborde (si es necesario) */
-    text-overflow: ellipsis; /* Mostrar "..." si el texto es muy largo */
-    max-width: 100%; /* Asegurarse de que el texto no supere el contenedor */
-}
-
-/* Opcional: hacer que el radio sea más grande o personalizado */
-input[type="radio"] {
-    width: 18px;
-    height: 18px;
-    accent-color: #004E64; /* Color personalizado para el radio (compatible en navegadores modernos) */
-}
-
-/* Estilo opcional para mejorar la apariencia del label */
-label span {
-    font-size: 16px; /* Tamaño de fuente */
-    color: #333; /* Color del texto */
-}
-
 
 form input:focus {
     border-color: #6c63ff;
@@ -182,6 +89,15 @@ form input:focus {
     background-color: rgba(0, 0, 0, 0.1); /* Cambio de color al pasar el ratón */
 }
 
+/* Address Container */
+.address-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.address-container div {
+    flex: 1;
+}
 form {
     width: 80%; /* Ajusta el ancho del formulario */
     max-width: 400px; /* O puedes fijar un ancho máximo */
@@ -232,7 +148,19 @@ form button[type="submit"]:hover {
     max-width: 100%;
     color: #ddd;
 }
+.back-button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem; /* Ajusta el tamaño según tu preferencia */
+    cursor: pointer;
+    color: #6c63ff; /* Color que se ajuste a tu paleta */
+    margin-right: 1rem; /* Espacio entre el botón y el título */
+    transition: color 0.3s;
+}
 
+.back-button:hover {
+    color: #3e0260; /* Cambia el color al pasar el ratón */
+}
 
 .autocomplete-results {
     position: absolute; /* Permite que se superponga al contenido */
@@ -258,77 +186,4 @@ form button[type="submit"]:hover {
 
 .autocomplete-results li:hover {
     background-color: rgba(0, 0, 0, 0.1); /* Cambio de color al pasar el ratón */
-}
-
-/* Columna derecha */
-.payment-section {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding-left: 20px; /* Separación de la otra columna */
-
-}
-
-.checkout-info {
-    margin-bottom: 20px;
-    background-color: #f9f9f9;
-    padding: 15px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.checkout-info h4 {
-    font-size: 18px;
-    margin-bottom: 10px;
-    color: #333;
-}
-
-.checkout-info p {
-    font-size: 14px;
-    color: #666;
-}
-
-.checkout-summary {
-    background-color: #f9f9f9;
-    padding: 20px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
-}
-
-.checkout-summary h4 {
-    font-size: 18px;
-    margin-bottom: 15px;
-    color: #333;
-    text-align: center;
-}
-
-.summary-item {
-    display: flex;
-    justify-content: space-between;
-    padding: 10px 0;
-    border-bottom: 1px solid #e0e0e0;
-}
-
-.summary-item.total {
-    font-weight: bold;
-    border-top: 2px solid #333;
-}
-
-.pay-button {
-    width: 100%;
-    padding: 10px;
-    background-color: #004E64;
-    color: white;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    margin-top: 20px;
-}
-
-.pay-button:hover {
-    background-color: #003747;
-}
-[class="summary-item"] {
-color: #6e6e6e;
 }

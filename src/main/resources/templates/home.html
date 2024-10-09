@@ -38,7 +38,7 @@
 
             <!-- Campo de cantidad -->
             <div class="product-quantity">
-              <input type="number" id="quantity-${product.id}" name="quantity" min="1" value="1">
+              <input type="number" id="quantity-${product.id}" name="quantity" min="1" value="1" oninput="validateQuantity(this)">
             </div>
 
             <!-- Botón de agregar al carrito -->
@@ -146,6 +146,12 @@
   }
 });
 
+function validateQuantity(input) {
+  // Si el valor es menor que 1 o está vacío, se establece a 1
+  if (input.value === "" || input.value < 1) {
+    input.value = 1;
+  }
+}
 </script>
 </body>
 </html>

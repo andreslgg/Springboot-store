@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Receipt</title>
+    <link rel="stylesheet" th:href="@{/receipt.css}" />
+</head>
+<body>
+<div class="receipt-container">
+    <header class="receipt-header">
+        <div class="company-logo">
+            <img th:src="@{/images/logo.png}" alt="Company Logo">
+        </div>
+        <div class="receipt-info">
+            <h1>Invoice</h1>
+            <p><strong>Invoice #: </strong> <span th:text="${invoiceNumber}"></span></p>
+            <p><strong>Date: </strong> <span th:text="${invoiceDate}"></span></p>
+        </div>
+    </header>
+
+    <section class="customer-info">
+        <p><strong>Billed To:</strong></p>
+        <p th:text="${customerName}"></p>
+        <p th:text="${customerAddress}"></p>
+    </section>
+
+    <section class="order-details">
+        <table class="order-table">
+            <thead>
+            <tr>
+                <th>Product</th>
+                <th>Quantity</th>
+                <th>Unit Price</th>
+                <th>Total</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="item : ${orderItems}">
+                <td th:text="${item.name}"></td>
+                <td th:text="${item.quantity}"></td>
+                <td th:text="${item.unitPrice}"></td>
+                <td th:text="${item.total}"></td>
+            </tr>
+            </tbody>
+            <tfoot>
+            <tr>
+                <td colspan="3">Subtotal</td>
+                <td th:text="${subtotal}"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Tax</td>
+                <td th:text="${tax}"></td>
+            </tr>
+            <tr>
+                <td colspan="3">Shipping Cost</td>
+                <td th:text="${shippingCost}"></td>
+            </tr>
+            <tr>
+                <td colspan="3"><strong>Total</strong></td>
+                <td th:text="${total}"></td>
+            </tr>
+            </tfoot>
+        </table>
+    </section>
+
+    <footer class="receipt-footer">
+        <div class="qr-code">
+            <img th:src="@{/images/{qrCodeUrl}(qrCodeUrl=${QrCodeUrl})}" alt="QrCodeUrl"/>
+        </div>
+        <div class="thank-you-note">
+            <p>Thank you for your business!</p>
+            <p>Visit us again at: <a th:href="@{/}" th:text="${companyWebsite}"></a></p>
+        </div>
+    </footer>
+</div>
+</body>
+</html>

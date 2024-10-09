@@ -5,33 +5,167 @@
     <link rel="stylesheet" th:href="@{/checkout.css}">
 </head>
 <body>
-<div class="checkout-summary">
-    <h4>Checkout Summary</h4>
-    <div class="summary-item">
-        <span>Sub-Total:</span>
-        <span th:text="'$' + ${subTotal}"></span>
-    </div>
-    <div class="summary-item">
-        <span>Shipping:</span>
-        <span th:text="'$' + ${shippingCost}"></span>
-    </div>
-    <div class="summary-item">
-        <span>Taxes:</span>
-        <span th:text="'$' + ${taxAmount}"></span>
-    </div>
-    <div class="summary-item">
-        <span>Total Amount:</span>
-        <span th:text="'$' + ${totalAmount}"></span>
+<div class="checkout-container">
+
+    <!-- Sección de Direcciones del Usuario (Columna Izquierda) -->
+    <div class="address-section">
+        <h4>User Addresses</h4>
+            <ul>
+                <!-- Iteramos sobre la lista de direcciones -->
+                <a th:each="address : ${addresses}">
+                    <label>
+                        <!-- Checkbox con el ID de la dirección como valor -->
+                        <input type="radio" th:value="${address.id}" name="selectedAddresses" onclick="setSelectedAddress(this.value)" />
+
+                        <!-- Mostrar la dirección en formato legible -->
+                        <span th:text="${address.street} + ' ' +${address.externalNumber} + ', ' + ${address.city} + ', ' + ${address.state}+ ', ' + ${address.country} + ' ' + ${address.zipCode}"></span>
+                    </label>
+                </a>
+            </ul>
+
+        <button class="add-address-button" onclick="toggleAddressForm()">+ Add Address</button>
+        <div id="error-message" style="color: red; display: none;">
+            Please select a shipping address.
+        </div>
+        <!-- Formulario para agregar nueva dirección -->
+        <div id="address-form" class="address-form" style="display: none;">
+            <div class="form-section">
+                <form  action="/addAddress" method="post">
+                    <label for="postalcode"><strong>Postal Code *</strong></label>
+                    <input type="number" id="postalcode" name="postalcode" placeholder="Enter postal code" onkeyup="fetchSuggestions()" autocomplete="off" required>
+                    <ul id="suggestions"></ul>
+
+                    <label for="country"><strong>Country *</strong></label>
+                    <input type="text" id="country" name="country" readonly required>
+
+                    <label for="state"><strong>State *</strong></label>
+                    <input type="text" id="state" name="state" readonly required>
+
+                    <label for="city"><strong>City *</strong></label>
+                    <input type="text" id="city" name="city" readonly required>
+
+                    <label for="street"><strong>Street *</strong></label>
+                    <input type="text" id="street" name="street" placeholder="Enter street name" required>
+
+                    <div class="address-container">
+                        <div>
+                            <label for="externalNumber"><strong>External Number *</strong></label>
+                            <input type="number" id="externalNumber" name="externalNumber" placeholder="External number" required>
+                        </div>
+                        <div>
+                            <label for="internalNumber"><strong>Internal Number</strong></label>
+                            <input type="text" id="internalNumber" name="internalNumber" placeholder="Internal number (optional)">
+                        </div>
+                    </div>
+                    <input type="hidden" id="user_id" name="user_id" th:value="${id}">
+                    <button type="submit">Save Location</button>
+                </form>
+            </div>
+        </div>
     </div>
 
-    <form action="/payment/create" method="post">
-        <input type="hidden" name="amount" th:value="${totalAmount}">
-        <input type="hidden" name="currency" value="USD"> <!-- Cambiar la moneda según sea necesario -->
-        <input type="hidden" name="method" value="paypal">
-        <input type="hidden" name="description" value="Purchase at Store">
-        <button type="submit">Pay with PayPal</button>
-    </form>
+    <!-- Columna Derecha: Información de Pago y Resumen -->
+    <div class="payment-section">
+        <!-- Sección de Información Relevante -->
+        <div class="checkout-info">
+            <h4>Important Information</h4>
+            <p>Your order is almost ready! Please review the details below carefully before proceeding to payment.</p>
+            <p>If you need assistance, feel free to contact our support team at support@example.com.</p>
+        </div>
 
+        <!-- Sección de Resumen de Checkout (Debajo) -->
+        <div class="checkout-summary">
+            <h4>Checkout Summary</h4>
+            <div class="summary-item">
+                <span>Sub-Total:</span>
+                <span th:text="'$' + ${subTotal}"></span>
+            </div>
+            <div class="summary-item">
+                <span>Shipping:</span>
+                <span th:text="'$' + ${shippingCost}"></span>
+            </div>
+            <div class="summary-item">
+                <span>Taxes:</span>
+                <span th:text="'$' + ${taxAmount}"></span>
+            </div>
+            <div class="summary-item total">
+                <span>Total Amount:</span>
+                <span th:text="'$' + ${totalAmount}"></span>
+            </div>
+
+            <form id="paymentForm" action="/payment/create" method="post">
+                <input type="hidden" name="amount" th:value="${subTotal}">
+                <input type="hidden" name="tax" th:value="${taxAmount}">
+                <input type="hidden" name="shipping" th:value="${shippingCost}">
+                <input type="hidden" name="currency" value="USD">
+                <input type="hidden" name="method" value="paypal">
+                <input type="hidden" name="description" value="Purchase at Store">
+                <input type="hidden" id="selectedAddressInput" name="selectedAddresses">
+                <button type="submit" class="pay-button">Pay with PayPal</button>
+            </form>
+        </div>
+    </div>
 </div>
+
+<script>
+    function toggleAddressForm() {
+        const form = document.getElementById('address-form');
+        form.style.display = (form.style.display === 'none') ? 'block' : 'none';
+    }
+
+        function fetchSuggestions() {
+        const postalCode = document.getElementById('postalcode').value;
+        if (postalCode.length < 3) return;
+
+        fetch(`/autocomplete?query=${postalCode}`)
+        .then(response => response.json())
+        .then(data => {
+        const suggestions = document.getElementById('suggestions');
+        suggestions.innerHTML = "";
+
+        data.forEach(item => {
+        const li = document.createElement('li');
+        li.innerText = item.display_name;
+        li.onclick = () => fillLocationFields(item);
+        suggestions.appendChild(li);
+    });
+    })
+        .catch(error => console.error('Error fetching suggestions:', error));
+    }
+
+        function fillLocationFields(item) {
+        document.getElementById('country').value = item.address.country || '';
+        document.getElementById('state').value = item.address.state || '';
+        document.getElementById('city').value = item.address.city || item.address.town || '';
+
+        document.getElementById('street').value = "";
+        document.getElementById('externalNumber').value = "";
+        document.getElementById('internalNumber').value = "";
+
+        document.getElementById('suggestions').innerHTML = "";
+        document.getElementById('postalcode').value = item.address.postcode || '';
+    }
+    document.getElementById("paymentForm").addEventListener("submit", function(event) {
+        var selectedAddress = document.getElementById("selectedAddressInput").value;
+
+        // Ocultar el mensaje de error si existe
+        var errorMessage = document.getElementById("error-message");
+        errorMessage.style.display = "none";
+
+        // Verificar si el campo oculto tiene un valor (si se ha seleccionado una dirección)
+        if (!selectedAddress) {
+            errorMessage.style.display = "block";  // Mostrar el mensaje de error
+            event.preventDefault(); // Evitar que el formulario se envíe
+        }
+    });
+
+    function setSelectedAddress(addressId) {
+        // Establece el valor del campo oculto en el formulario de pago
+        document.getElementById("selectedAddressInput").value = addressId;
+
+        // Ocultar el mensaje de error si se selecciona una dirección
+        document.getElementById("error-message").style.display = "none";
+    }
+</script>
 </body>
 </html>

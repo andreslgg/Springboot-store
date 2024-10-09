@@ -1,10 +1,69 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Iniciar Sesión</title>
+  <link rel="stylesheet" th:href="@{/login.css}">
 </head>
 <body>
-<h1>Iniciar Sesión</h1>
-<a href="/oauth2/authorization/google">Iniciar sesión con Google</a>
+    <div class="container-form">
+      <div class="form-section">
+
+        <form th:action="@{/login}" method="post">
+          <div class="signin-container">
+            <button class="back-button" onclick="window.history.back()"><i><?xml version="1.0" encoding="UTF-8" standalone="no"?> <!-- Uploaded to: SVG Repo, www.svgrepo.com, Generator: SVG Repo Mixer Tools --> <svg width="20px" height="20px" viewBox="-4.5 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"> <title>arrow_left [#335]</title> <desc>Created with Sketch.</desc> <defs> </defs> <g id="Page-1" background="#fff" stroke="none" stroke-width="1" fill="#232323" fill-rule="evenodd"> <g id="Dribbble-Light-Preview" transform="translate(-345.000000, -6679.000000)" fill="#000000"> <g id="icons" transform="translate(56.000000, 160.000000)"> <path d="M299.633777,6519.29231 L299.633777,6519.29231 C299.228878,6518.90256 298.573377,6518.90256 298.169513,6519.29231 L289.606572,6527.55587 C288.797809,6528.33636 288.797809,6529.60253 289.606572,6530.38301 L298.231646,6538.70754 C298.632403,6539.09329 299.27962,6539.09828 299.685554,6538.71753 L299.685554,6538.71753 C300.100809,6538.32879 300.104951,6537.68821 299.696945,6537.29347 L291.802968,6529.67648 C291.398069,6529.28574 291.398069,6528.65315 291.802968,6528.26241 L299.633777,6520.70538 C300.038676,6520.31563 300.038676,6519.68305 299.633777,6519.29231" id="arrow_left-[#335]"> </path> </g> </g> </g> </svg></i></button>
+            <h2>Sign in</h2>
+          </div>
+
+          <label for="email">Email</label>
+          <input type="email" id="email" name="username" required>
+
+          <label for="password">Password</label>
+          <input type="password" id="password" name="password" required>
+
+          <button type="submit" class="sign-in-btn">Sign in</button>
+
+          <div class="create-account">
+            <a th:href="@{/register}">CREATE AN ACCOUNT</a>
+          </div>
+          <hr>
+
+          <button class="gsi-material-button" onclick="window.location.href='/oauth2/authorization/google'">
+            <div class="gsi-material-button-state"></div>
+            <div class="gsi-material-button-content-wrapper">
+              <div class="gsi-material-button-icon">
+                <svg version="1.1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink" style="display: block;">
+                  <path fill="#EA4335" d="M24 9.5c3.54 0 6.71 1.22 9.21 3.6l6.85-6.85C35.9 2.38 30.47 0 24 0 14.62 0 6.51 5.38 2.56 13.22l7.98 6.19C12.43 13.72 17.74 9.5 24 9.5z"></path>
+                  <path fill="#4285F4" d="M46.98 24.55c0-1.57-.15-3.09-.38-4.55H24v9.02h12.94c-.58 2.96-2.26 5.48-4.78 7.18l7.73 6c4.51-4.18 7.09-10.36 7.09-17.65z"></path>
+                  <path fill="#FBBC05" d="M10.53 28.59c-.48-1.45-.76-2.99-.76-4.59s.27-3.14.76-4.59l-7.98-6.19C.92 16.46 0 20.12 0 24c0 3.88.92 7.54 2.56 10.78l7.97-6.19z"></path>
+                  <path fill="#34A853" d="M24 48c6.48 0 11.93-2.13 15.89-5.81l-7.73-6c-2.15 1.45-4.92 2.3-8.16 2.3-6.26 0-11.57-4.22-13.47-9.91l-7.98 6.19C6.51 42.62 14.62 48 24 48z"></path>
+                  <path fill="none" d="M0 0h48v48H0z"></path>
+                </svg>
+              </div>
+              <span class="gsi-material-button-contents">Sign in with Google</span>
+              <span style="display: none;">Sign in with Google</span>
+            </div>
+          </button>
+
+
+          <div class="extra-links">
+            <a href="#">Lost password</a> |
+            <a href="#">Resend verification email</a>
+          </div>
+        </form>
+      </div>
+
+      <!-- Instruction Text -->
+      <div class="instructions">
+        <h1>Elevate your shopping experience</h1>
+        <h1 class="colored">#withEase</h1>
+        <p>Discover and purchase products effortlessly. Shop smarter, faster, and with confidence, all in one place.
+
+          Trusted by customers | Always free to explore</p>
+      </div>
+
+      </div>
 </body>
+
 </html>

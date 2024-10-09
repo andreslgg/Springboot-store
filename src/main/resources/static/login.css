@@ -1,0 +1,284 @@
+body {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background-color: #f4f4f4;
+    /*margin: 0;*/
+    background: linear-gradient(to right, #ffffff 50%, #004E64 50%);
+}
+
+/* Container */
+.container-form {
+    display: flex;
+    /*max-width: 1200px;*/
+    width: 100%;
+    /*box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);*/
+    /*border-radius: 16px;*/
+    overflow: hidden;
+}
+
+/* Form Section */
+.form-section {
+    flex: 1;
+    padding: 3rem;
+    background-color: #ffffff;
+
+}
+
+.form-section h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 1.5rem;
+}
+
+/* Labels */
+form label {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 0.3rem;
+    display: block;
+}
+
+/* Input Styles */
+form input[type="text"],
+form input[type="number"],
+form input[type="email"],
+form input[type="password"]{
+    width: 100%;
+    padding: 1rem;
+    margin-bottom: 1.2rem;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+    color: #333;
+    transition: border-color 0.3s;
+    box-sizing: border-box;
+}
+
+form input:focus {
+    border-color: #6c63ff;
+    outline: none;
+    background-color: #ffffff;
+}
+
+
+form {
+    width: 80%; /* Ajusta el ancho del formulario */
+    max-width: 400px; /* O puedes fijar un ancho máximo */
+    margin-left: auto; /* Mueve el formulario hacia la derecha */
+    margin-right: auto; /* Centra el formulario dentro del contenedor */
+}
+/* Submit Button */
+form button[type="submit"] {
+    width: 100%;
+    padding: 1rem;
+    font-size: 1.1rem;
+    font-weight: bold;
+    background: linear-gradient(90deg, #5EBFE8,#004E64);
+    color: #ffffff;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background 0.3s;
+    margin-top: 1.5rem;
+}
+
+form button[type="submit"]:hover {
+    background: linear-gradient(90deg, #51a5c8, #002f3c);
+}
+
+/* Instruction Text */
+.instructions {
+    flex: 1;
+    padding: 3rem;
+    color: #fff;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: #004E64;
+}
+
+.instructions h1 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+    color: #fff;
+}
+
+.instructions p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+    max-width: 100%;
+    color: #ddd;
+}
+.back-button {
+    background-color: transparent;
+    border: none;
+    font-size: 1.5rem; /* Ajusta el tamaño según tu preferencia */
+    cursor: pointer;
+    color: #6c63ff; /* Color que se ajuste a tu paleta */
+    margin-right: 1rem; /* Espacio entre el botón y el título */
+    transition: color 0.3s;
+}
+
+.back-button:hover {
+    color: #3e0260; /* Cambia el color al pasar el ratón */
+}
+
+
+
+.gsi-material-button {
+    -moz-user-select: none;
+    -webkit-user-select: none;
+    -ms-user-select: none;
+    -webkit-appearance: none;
+    background-color: #f2f2f2;
+    background-image: none;
+    border: none;
+    -webkit-border-radius: 4px;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    color: #1f1f1f;
+    cursor: pointer;
+    font-family: 'Roboto', arial, sans-serif;
+    font-size: 14px;
+    height: 60px;
+    letter-spacing: 0.25px;
+    outline: none;
+    overflow: hidden;
+    padding: 0 12px;
+    position: relative;
+    text-align: center;
+    -webkit-transition: background-color .218s, border-color .218s, box-shadow .218s;
+    transition: background-color .218s, border-color .218s, box-shadow .218s;
+    vertical-align: middle;
+    white-space: nowrap;
+    width: 100%;
+    max-width: 600px;
+
+    min-width: min-content;
+    border-color: #8e918f;
+}
+
+.gsi-material-button .gsi-material-button-icon {
+    height: 20px;
+    margin-right: 12px;
+    min-width: 20px;
+    width: 20px;
+}
+
+.gsi-material-button .gsi-material-button-content-wrapper {
+    -webkit-align-items: center;
+    align-items: center;
+    display: flex;
+    -webkit-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+    height: 100%;
+    justify-content: space-between;
+    position: relative;
+    width: 100%;
+}
+
+.gsi-material-button .gsi-material-button-contents {
+    -webkit-flex-grow: 1;
+    flex-grow: 1;
+    font-family: 'Roboto', arial, sans-serif;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    vertical-align: top;
+}
+
+.gsi-material-button .gsi-material-button-state {
+    -webkit-transition: opacity .218s;
+    transition: opacity .218s;
+    bottom: 0;
+    left: 0;
+    opacity: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+.gsi-material-button:disabled {
+    cursor: default;
+    background-color: #13131461;
+    border-color: #8e918f1f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-state {
+    background-color: #e3e3e31f;
+}
+
+.gsi-material-button:disabled .gsi-material-button-contents {
+    opacity: 38%;
+}
+
+.gsi-material-button:disabled .gsi-material-button-icon {
+    opacity: 38%;
+}
+
+.gsi-material-button:not(:disabled):active .gsi-material-button-state,
+.gsi-material-button:not(:disabled):focus .gsi-material-button-state {
+    background-color: white;
+    opacity: 12%;
+}
+
+.gsi-material-button:not(:disabled):hover {
+    -webkit-box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+    box-shadow: 0 1px 2px 0 rgba(60, 64, 67, .30), 0 1px 3px 1px rgba(60, 64, 67, .15);
+}
+
+.gsi-material-button:not(:disabled):hover .gsi-material-button-state {
+    background-color: white;
+    opacity: 8%;
+}
+
+/* Address Container */
+.signin-container {
+    display: flex;
+    gap: 2rem;
+}
+
+.signin-container div {
+    flex: 1;
+}
+
+.extra-links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.extra-links a {
+    color: #808080;
+    text-decoration: none;
+    margin: 0 5px;
+}
+
+.create-account {
+    margin: 15px 0;
+    text-align: center;
+}
+
+.create-account a {
+    color: #004E64;
+    text-decoration: none;
+}
+
+.instructions h1{
+    font-size: 60px;
+    line-height: 73px;
+
+}
+
+.instructions h1.colored{
+    color: #00ffff;
+}

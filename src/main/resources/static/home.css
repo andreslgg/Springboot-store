@@ -81,14 +81,14 @@
     margin: 10px 5px;
     border: none;
     border-radius: 5px;
-    background-color: #f39c12;
+    background-color: #004E64;
     color: white;
     cursor: pointer;
     font-size: 1rem;
 }
 
 .product-actions button:hover {
-    background-color: #e67e22;
+    background-color: #003342;
 }
 
 /* Estilos para los círculos de colores */
@@ -314,8 +314,18 @@
     box-sizing: border-box;
 }
 
+.product-quantity input[type="number"]{
+    padding: 10px;
+    font-size: 1rem;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    width: 20%;
+    box-sizing: border-box;
+
+}
+
 .filter-section button {
-    background-color: #007bff;
+    background-color: #004E64;
     color: #fff;
     border: none;
     cursor: pointer;
@@ -325,7 +335,7 @@
 
 
 .filter-section button:hover {
-    background-color: #0056b3;
+    background-color: #003847;
 }
 
 
@@ -486,3 +496,4 @@
     color: #aaa; /* Color del texto cuando el botón está deshabilitado */
     cursor: not-allowed; /* Cursor de no permitido */
 }
+

@@ -2,12 +2,17 @@ package com.store.oncommerce_web.controller;
 
 import com.store.oncommerce_web.model.Cart;
 import com.store.oncommerce_web.model.Product;
+import com.store.oncommerce_web.model.User;
 import com.store.oncommerce_web.repository.ProductRepository;
 import com.store.oncommerce_web.service.CartService;
 import com.store.oncommerce_web.service.ProductService;
+import com.store.oncommerce_web.service.UserService;
 import org.antlr.v4.runtime.tree.pattern.ParseTreePattern;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -43,28 +48,24 @@ public class HomeController {
         return cartService.getCart(); // Retornamos el carrito desde el servicio
     }
 
+    @Autowired
+    private UserService userService;
+
     @ModelAttribute
-    public void addAttributes(Model model, @AuthenticationPrincipal OAuth2User principal) {
-        if (principal != null) {
-            String fullName = principal.getAttribute("name");
-            String firstName = fullName != null ? fullName.split(" ")[0] : "";
-            model.addAttribute("firstName", firstName);
+    public void addAttributes(Model model) {
+        User user = userService.getAuthenticatedUser();
+        if (user != null) {
+            model.addAttribute("firstName", user.getFirstName());
+            model.addAttribute("lastName", user.getLastName());
+            model.addAttribute("email", user.getEmail());
         }
     }
-
     @GetMapping("/products")
     public String getProducts(Model model, @RequestParam(required = false) String searchTerm,
                               @RequestParam(required = false) String category,
                               @RequestParam(required = false) Double minPrice,
                               @RequestParam(required = false) Double maxPrice,
-                              @RequestParam(required = false) Double minRating,
-                              @AuthenticationPrincipal OAuth2User principal) {
-        if (principal != null) {
-            String fullName = principal.getAttribute("name");
-            String firstName = fullName != null ? fullName.split(" ")[0] : "";
-
-            model.addAttribute("firstName", firstName);
-        }
+                              @RequestParam(required = false) Double minRating) {
 
         // Recupera el mensaje flash si existe
         if (model.containsAttribute("message")) {
@@ -104,12 +105,6 @@ public class HomeController {
         model.addAttribute("cart","cart");
         model.addAttribute("hasProducts", cartService.hasProducts());
         model.addAttribute("content","home");
-        return "layout";
-    }
-
-    @GetMapping("/login")
-    public String login(Model model) {
-        model.addAttribute("content","login");
         return "layout";
     }
 

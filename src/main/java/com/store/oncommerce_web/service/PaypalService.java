@@ -3,6 +3,7 @@ package com.store.oncommerce_web.service;
 import com.paypal.api.payments.*;
 import com.paypal.base.rest.APIContext;
 import com.paypal.base.rest.PayPalRESTException;
+import com.store.oncommerce_web.model.Address;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -17,25 +18,50 @@ public class PaypalService {
     private final APIContext apiContext;
 
     public Payment createPayment(
-            Double total,
+            Double subtotal,
+            Double tax, // Agregar parámetro para el impuesto
+            Double shipping,
             String currency,
             String method,
             String intent,
             String description,
             String cancelUrl,
-            String successUrl
+            String successUrl,
+            Address address
     ) throws PayPalRESTException {
+        // Crear el objeto Amount
         Amount amount = new Amount();
         amount.setCurrency(currency);
-        amount.setTotal(String.format(Locale.forLanguageTag(currency), "%.2f", total)); // 9.99$ - 9,99€
+
+        // Crear un objeto Details para incluir subtotal, tax y shipping
+        Details details = new Details();
+        details.setSubtotal(String.format(Locale.forLanguageTag(currency), "%.2f", subtotal)); // Total sin impuestos
+        details.setTax(String.format(Locale.forLanguageTag(currency), "%.2f", tax)); // Impuestos
+        details.setShipping(String.format(Locale.forLanguageTag(currency), "%.2f", shipping)); // Costo de envío
+
+        // Establecer el total sumando subtotal y tax
+        double totalWithTax = subtotal + tax; // Total con impuestos
+        amount.setTotal(String.format(Locale.forLanguageTag(currency), "%.2f", totalWithTax+shipping)); // Total con impuestos
+
+        // Agregar detalles a Amount
+        amount.setDetails(details);
 
         Transaction transaction = new Transaction();
         transaction.setDescription(description);
         transaction.setAmount(amount);
 
+        transaction.setCustom(String.format(
+                "Shipping Address: %s, %s, %s, %s, %s, %s",
+                address.getStreet(),
+                String.valueOf(address.getExternalNumber()),
+                address.getCity(),
+                address.getState(),
+                address.getZipCode(),
+                address.getCountry()
+        ));
+
         List<Transaction> transactions = new ArrayList<>();
         transactions.add(transaction);
-
         Payer payer = new Payer();
         payer.setPaymentMethod(method);
 
